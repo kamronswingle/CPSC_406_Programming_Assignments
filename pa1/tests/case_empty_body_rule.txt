@@ -1,0 +1,6 @@
+=== INPUT ===
+[[p], [-p,q], [-q,r]]
+
+=== EXPECTED ===
+satisfiable: true
+true_vars: p q r

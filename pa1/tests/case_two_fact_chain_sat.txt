@@ -1,0 +1,6 @@
+=== INPUT ===
+[[a],[b],[-a,-b,c],[-c,d]]
+
+=== EXPECTED ===
+satisfiable: true
+true_vars: a b c d
