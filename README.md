@@ -4,6 +4,7 @@
 ## Collaborators
 - Kamron Swingle
 - Jun Yi
+- Taylor Eskew
 
 ## Overview
 This repository contains programming assignments for CPSC 406 (Algorithm Analysis). Each assignment is contained in its own subdirectory.
@@ -13,6 +14,8 @@ This repository contains programming assignments for CPSC 406 (Algorithm Analysi
 | Assignment | Topic | Status |
 |---|---|---|
 | PA1 | Horn Formula Satisfiability Solver | Complete |
+| PA2 | General SAT Solver | Complete |
+| PA2 | Sudoku Solver via SAT | In Progress |
 
 ## Running Any Assignment
 
