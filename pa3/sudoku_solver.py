@@ -7,7 +7,6 @@ import sys
 
 from sat_solver import sat_solve
 
-
 def varnum(row, col, digit):
     """Encode (row, col, digit) as one positive SAT variable.
 
@@ -28,20 +27,53 @@ def exactly_one(literals):
     return clauses
 
 
-def sudoku_encode(grid):
-    """Encode a 9 x 9 Sudoku grid as CNF.
+def sudoku_encode(grid): # Note, claude did help with this function, it broke down the problem to us and gave us sudocode and how to approach this problem
+    clauses = []
 
-    A 0 in the grid means an empty cell.
-    """
-    # TODO: Build and return the CNF clauses for the Sudoku constraints.
-    #
-    # Hint:
-    # - every cell has exactly one digit
-    # - every row contains every digit
-    # - every column contains every digit
-    # - every 3 x 3 box contains every digit
-    # - every given number becomes a unit clause
-    raise NotImplementedError
+    # Each cell contains exactly one digit
+    for row in range(1, 10):
+        for col in range(1, 10):
+            literals = []
+            for digit in range(1, 10):
+                literals.append(varnum(row, col, digit))
+            clauses.extend(exactly_one(literals))
+
+    # Each digit appears exactly once in every row
+    for row in range(1, 10):
+        for digit in range(1, 10):
+            literals = []
+            for col in range(1, 10):
+                literals.append(varnum(row, col, digit))
+            clauses.extend(exactly_one(literals))
+
+    # Each digit appears exactly once in every column
+    for col in range(1, 10):
+        for digit in range(1, 10):
+            literals = []
+            for row in range(1, 10):
+                literals.append(varnum(row, col, digit))
+            clauses.extend(exactly_one(literals))
+
+    # Each digit appears exactly once in every 3x3 box, main thing claude helped with here
+    for box_row in range(3):
+        for box_col in range(3):
+            for digit in range(1, 10):
+                literals = []
+                for dr in range(1, 4):
+                    for dc in range(1, 4):
+                        row = 3 * box_row + dr
+                        col = 3 * box_col + dc
+                        literals.append(varnum(row, col, digit))
+                clauses.extend(exactly_one(literals))
+
+    # Fix the given digits
+    for row in range(1, 10):
+        for col in range(1, 10):
+            digit = grid[row - 1][col - 1]
+            if digit != 0:
+                clauses.append([varnum(row, col, digit)])
+
+    return clauses
 
 
 def decode_solution(assignment):
@@ -58,8 +90,12 @@ def decode_solution(assignment):
 
 def solve(grid):
     """Return a solved Sudoku grid, or None if the puzzle is unsolvable."""
-    # TODO: Encode the grid, call sat_solve, and decode the result.
-    raise NotImplementedError
+    clauses = sudoku_encode(grid)
+    assignment = sat_solve(clauses, {})
+    if assignment is None:
+        return None
+    return decode_solution(assignment)
+
 
 
 def print_result(solution):
