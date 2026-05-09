@@ -32,7 +32,5 @@ variables are `True` and reconstructs the solved grid.
 
 ## Usage
 ```bash
-python3 sudoku_solver.py "[[5,3,0,0,7,0,0,0,0], ...]"
+python tests/test_pa3.py --solution sudoku_solver.py
 ```
-
-## Output
