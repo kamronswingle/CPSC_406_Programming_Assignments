@@ -15,7 +15,7 @@ This repository contains programming assignments for CPSC 406 (Algorithm Analysi
 |---|---|---|
 | PA1 | Horn Formula Satisfiability Solver | Complete |
 | PA2 | General SAT Solver | Complete |
-| PA2 | Sudoku Solver via SAT | In Progress |
+| PA2 | Sudoku Solver via SAT | Complete |
 
 ## Running Any Assignment
 
